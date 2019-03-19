@@ -1,0 +1,33 @@
+import time
+import threading
+
+
+def showName(threadNum, name):
+    nowTime = time.strftime('%H:%M:%S', time.localtime(time.time()))
+    print('my name is function- %s,now time: %s' % (name, nowTime))
+    time.sleep(1)
+
+
+if __name__ == '__main__':
+    # for i in range(10):
+    #     showName(i)
+
+    names = range(20)
+    threadNum = 1
+    tnreadPool = []
+    while names:
+        for i in range(6):
+            try:
+                name = names.pop()
+            except IndexError as e:
+                print('the list is empty ')
+                break
+            else:
+                t = threading.Thread(target=showName, args=(i, name,))
+            threadPool.append(t)
+            t.start()
+        while threadPool:
+            t = threadPool.pop()
+            t.join()
+        threadNum += 1
+    print('over')
